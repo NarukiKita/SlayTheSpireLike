@@ -4,7 +4,6 @@ public class BattleManager : MonoBehaviour
 {
 //inspector============================================================================================================
 
-    [SerializeField] private Deck deck;
     [SerializeField] private UIManager uiManager;
     [SerializeField] private CardEffectManager cardEffectManager;
     [SerializeField] private PlayerManager playerManager;
@@ -14,6 +13,7 @@ public class BattleManager : MonoBehaviour
 
 //変数===========================================================================================================================
     private bool battleEnded = false;
+    private Deck deck;
 //===========================================================================================================================
 
 //Start()=====================================================================================================================-==
@@ -21,6 +21,8 @@ public class BattleManager : MonoBehaviour
     private void Start()
     {
         Debug.Log("BMでStart起動");
+        deck = Deck.Instance;
+        deck.InitializeBattleDeck();
         StartPlayerTurn();
     }
 

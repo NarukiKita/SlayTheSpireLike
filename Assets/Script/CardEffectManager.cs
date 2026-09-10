@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CardEffectManager : MonoBehaviour
 {
-    [SerializeField] private Deck deck;
     [SerializeField] private PlayerManager playerManager;
     [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private UIManager uiManager;
@@ -12,10 +11,12 @@ public class CardEffectManager : MonoBehaviour
     private CardEffect[] pendingFollowUpEffects;
     private CardEffect pendingEffect;
     private System.Action pendingOnComplete;
+    private Deck deck;
 
     private void Start()
     {
         uiManager.OnCardSelectedForDiscard += OnCardSelectedForDiscard;
+        deck = Deck.Instance;
     }
 
     public void ApplyEffect(Card card, System.Action onComplete)

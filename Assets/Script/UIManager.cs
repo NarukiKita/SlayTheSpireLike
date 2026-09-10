@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Deck deck;
     [SerializeField] private GameObject victoryPanel;
     [SerializeField] private GameObject defeatPanel;
+    [SerializeField] private GameObject rewardPanel;
     [SerializeField] private GameObject strengthUI;
     [SerializeField] private GameObject poisonUI;
     [SerializeField] private GameObject energyWarningText;
@@ -229,6 +230,11 @@ public class UIManager : MonoBehaviour
     public void DefeatUI()
     {
         defeatPanel.SetActive(true);
+    }
+
+    public void RewardUI()
+    {
+        rewardPanel.SetActive(true);
     }
 //=======================================================================================================================
 }

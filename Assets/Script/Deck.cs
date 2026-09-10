@@ -3,19 +3,64 @@ using System.Collections.Generic;
 
 public class Deck : MonoBehaviour
 {
-    [SerializeField] private List<Card> drawPile;
+    [SerializeField] private List<Card> initialDeck;
+    private List<Card> drawPile = new List<Card>();
     [SerializeField] private List<Card> hand;
     [SerializeField] private List<Card> discardPile;
 
+    private static Deck instance;
+    public static Deck Instance => instance;
 
     private void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Debug.Log(
+                $"新しいDeckを破棄しました: {gameObject.GetEntityId()} / " +
+                $"initialDeck={initialDeck.Count}"
+            );
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+        Debug.Log("Deckを生成しました: " + gameObject.GetEntityId());
+        Debug.Log(
+            $"Deck Awake: {gameObject.GetEntityId()} / " +
+            $"initialDeck={initialDeck.Count}"
+        );
+    }
+
+    //Deckの初期化
+    public void InitializeBattleDeck()
+    {
+        drawPile.Clear();
+        hand.Clear();
+        discardPile.Clear();
+
+        drawPile.AddRange(initialDeck);
         ShuffleDrawPile();
+
+        Debug.Log(
+            $"Deckを初期化しました: " +
+            $"initialDeck={initialDeck.Count}, " +
+            $"drawPile={drawPile.Count}, " +
+            $"hand={hand.Count}, " +
+            $"discardPile={discardPile.Count}"
+        );
     }
 
     //山札からカードを引く
     public Card DrawCard()
     {
+        Debug.Log(
+            $"DrawCard: Deck={gameObject.GetEntityId()}, " +
+            $"initialDeck={initialDeck.Count}, " +
+            $"drawPile={drawPile.Count}, " +
+            $"hand={hand.Count}, " +
+            $"discardPile={discardPile.Count}"
+        );
         if (drawPile.Count == 0)
         {
             ReshuffleDiscard();
@@ -75,6 +120,12 @@ public class Deck : MonoBehaviour
             discardPile.Remove(card);
             hand.Add(card);
         }
+    }
+
+    //デッキにカード追加
+    public void AddCard(Card card)
+    {
+        initialDeck.Add(card);
     }
 
     public IReadOnlyList<Card> DiscardPile => discardPile;
