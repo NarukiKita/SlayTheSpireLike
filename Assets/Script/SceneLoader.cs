@@ -8,4 +8,9 @@ public class SceneLoader : MonoBehaviour
         Debug.Log("読み直し");
         SceneManager.LoadScene("SampleScene");
     }
+    
+    public void LoadMap()
+    {
+        SceneManager.LoadScene("MapScene");
+    }
 }

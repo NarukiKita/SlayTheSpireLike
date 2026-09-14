@@ -10,7 +10,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private int playerShield = 0;
 
     [SerializeField] private int strength = 0;
-
+    [SerializeField] private int poison = 0;
     [SerializeField] private int maxEnergy = 3;
     [SerializeField] private int currentEnergy = 3;
 
@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
 
 //=====================================================================================================================
 
-//変数==============================================================================================================
+//読み取り==============================================================================================================
 
     // HP
     public int HP => playerHP;
@@ -29,6 +29,9 @@ public class PlayerManager : MonoBehaviour
 
     // Shield
     public int Shield => playerShield;
+
+    //Poison
+    public int Poison => poison;
 
     // Strength
     public int Strength => strength;
@@ -71,6 +74,13 @@ public class PlayerManager : MonoBehaviour
         return card.cost;
     }
 
+//========================================================================================================================
+
+//毒付与される=============================================================================================================
+    public void AddPoison(int amount)
+    {
+        poison += amount;
+    }
 //========================================================================================================================
 
 

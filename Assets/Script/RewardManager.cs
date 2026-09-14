@@ -8,12 +8,14 @@ public class RewordManager : MonoBehaviour
     [SerializeField] private Deck deck;
     [SerializeField] private GameObject rewardPanel;
     [SerializeField] private GameObject victoryPanel;
+    [SerializeField] private GameObject mapButton;
 
 
     public void ShowReward()
     {
         victoryPanel.SetActive(false);
         rewardPanel.SetActive(true);
+        mapButton.SetActive(false);
         foreach (Transform child in rewardCardPanel)
         {
             Destroy(child.gameObject);
@@ -36,6 +38,6 @@ public class RewordManager : MonoBehaviour
         Debug.Log("報酬カードを選択しました: " + selectedCard.cardName);
         deck.AddCard(selectedCard);
         Debug.Log("デッキに追加しました: " + selectedCard.cardName);
-        rewardPanel.SetActive(false);
+        mapButton.SetActive(true);
     }
 }

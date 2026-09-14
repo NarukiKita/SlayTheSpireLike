@@ -132,8 +132,7 @@ public class BattleManager : MonoBehaviour
             return;
         }
 
-        playerManager.TakeDamage(enemyManager.AttackPower);
-
+        enemyManager.TakeAction(playerManager);
         uiManager.UpdatePlayerHPUI();
         uiManager.UpdatePlayerShieldUI();
         uiManager.UpdateEnemyHPUI();
