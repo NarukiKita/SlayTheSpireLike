@@ -21,6 +21,33 @@ public class PlayerManager : MonoBehaviour
 
 //=====================================================================================================================
 
+    private static PlayerManager instance;
+    public static PlayerManager Instance => instance;
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            Debug.Log("新しいPlayerManagerを削除 : " + gameObject.GetEntityId());
+            Destroy(gameObject);
+            return;
+        }
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+        Debug.Log("PlayerManagerを永続化 : " + gameObject.GetEntityId());
+    }
+
+    private void Start()
+    {
+        Debug.Log(
+            "PlayerManager Start : ID = " +
+            gameObject.GetEntityId() +
+            " / HP = " +
+            playerHP
+        );
+    }
+
 //読み取り==============================================================================================================
 
     // HP
@@ -131,6 +158,12 @@ public class PlayerManager : MonoBehaviour
         }
 
         playerHP -= damage;
+        Debug.Log(
+                    "PlayerManager TakeDamage : ID = " +
+                    gameObject.GetEntityId() +
+                    " / HP = " +
+                    playerHP
+                );
     }
 
 //================================================================================================================================

@@ -8,7 +8,6 @@ public class UIManager : MonoBehaviour
 {
 //Inspector===============================================================================================================
 
-    [SerializeField] private PlayerManager playerManager;
     [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private CardUI cardUIPrefab;
     [SerializeField] private BattleManager battleManager;
@@ -120,31 +119,31 @@ public class UIManager : MonoBehaviour
     public void UpdateEnergyUI()
     {
         
-        energyText.text = "Energy: " + playerManager.CurrentEnergy + " / " + playerManager.MaxEnergy;
+        energyText.text = "Energy: " + PlayerManager.Instance.CurrentEnergy + " / " + PlayerManager.Instance.MaxEnergy;
     }
 
     //PlayerHP================================================================================================
     public void UpdatePlayerHPUI()
     {
-        playerHPText.text = "HP: " + playerManager.HP;
+        playerHPText.text = "HP: " + PlayerManager.Instance.HP;
     }
 
     //PlayerShield============================================================================================
     public void UpdatePlayerShieldUI()
     {
-        playerShieldText.text = "Shield: " + playerManager.Shield;
+        playerShieldText.text = "Shield: " + PlayerManager.Instance.Shield;
     }
 
     //StrengthUI==============================================================================================
     public void UpdateStrengthUI()
     {
-        strengthUI.SetActive(playerManager.Strength > 0);
+        strengthUI.SetActive(PlayerManager.Instance.Strength > 0);
     }
 
     //StrengthText============================================================================================
     public void UpdateStrengthUIText()
     {
-        strengthUIText.text = "" + playerManager.Strength;
+        strengthUIText.text = "" + PlayerManager.Instance.Strength;
     }
 
     //PoisonUI================================================================================================

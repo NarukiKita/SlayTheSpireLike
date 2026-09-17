@@ -6,8 +6,7 @@ public class BattleManager : MonoBehaviour
 
     [SerializeField] private UIManager uiManager;
     [SerializeField] private CardEffectManager cardEffectManager;
-    [SerializeField] private PlayerManager playerManager;
-    [SerializeField] private EnemyManager enemyManager;    
+    [SerializeField] private EnemyManager enemyManager;  
 
 //========================================================================================================================
 
@@ -16,6 +15,9 @@ public class BattleManager : MonoBehaviour
     private Deck deck;
 //===========================================================================================================================
 
+//読み取り====================================================================================================================
+
+//=========================================================================================================================
 //Start()=====================================================================================================================-==
 
     private void Start()
@@ -37,14 +39,14 @@ public class BattleManager : MonoBehaviour
         {
             return;
         }
-        if (playerManager.CanUseCard(card))
+        if (PlayerManager.Instance.CanUseCard(card))
         {
             //コスト消費
-            playerManager.SpendEnergy(card);
-            playerManager.RecordCardPlayed();
+            PlayerManager.Instance.SpendEnergy(card);
+            PlayerManager.Instance.RecordCardPlayed();
             if (card.HasEffect(EffectType.Attack))
             {
-                playerManager.RecordAttackPlayed();
+                PlayerManager.Instance.RecordAttackPlayed();
             }
             uiManager.UpdateEnergyUI();
             Debug.Log(card.cardName + "を使用しました");
@@ -86,7 +88,7 @@ public class BattleManager : MonoBehaviour
 
     private void StartPlayerTurn()
     {
-        playerManager.StartTurn();
+        PlayerManager.Instance.StartTurn();
         uiManager.UpdateEnergyUI();
         for (int i = 0; i < 5; i++)
         {
@@ -108,8 +110,8 @@ public class BattleManager : MonoBehaviour
         Debug.Log("プレイヤーターン終了");
         deck.DiscardHand();
         uiManager.ClearHand();
-        playerManager.ResetStrength();
-        playerManager.ResetCardsPlayedThisTurn();
+        PlayerManager.Instance.ResetStrength();
+        PlayerManager.Instance.ResetCardsPlayedThisTurn();
         uiManager.UpdateStrengthUI();
         StartEnemyTurn();
     }
@@ -132,13 +134,13 @@ public class BattleManager : MonoBehaviour
             return;
         }
 
-        enemyManager.TakeAction(playerManager);
+        enemyManager.TakeAction(PlayerManager.Instance);
         uiManager.UpdatePlayerHPUI();
         uiManager.UpdatePlayerShieldUI();
         uiManager.UpdateEnemyHPUI();
 
         Debug.Log("敵のターン終了");
-        if (playerManager.IsDead())
+        if (PlayerManager.Instance.IsDead())
         {
             LoseBattle();
             return;

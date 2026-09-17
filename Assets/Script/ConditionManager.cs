@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ConditionManager : MonoBehaviour
 {
-    [SerializeField] private PlayerManager playerManager;
     [SerializeField] private EnemyManager enemyManager;
 
     public bool CheckCondition(CardCondition condition)
@@ -16,7 +15,7 @@ public class ConditionManager : MonoBehaviour
         switch (condition.conditionType)
         {
             case ConditionType.PlayerHP:
-                conditionValue = playerManager.HP;
+                conditionValue = PlayerManager.Instance.HP;
                 break;
 
             case ConditionType.EnemyHP:
@@ -24,7 +23,7 @@ public class ConditionManager : MonoBehaviour
                 break;
 
             case ConditionType.CardsPlayedThisTurn:
-                conditionValue = playerManager.CardsPlayedThisTurn;
+                conditionValue = PlayerManager.Instance.CardsPlayedThisTurn;
                 break;
 
             default:

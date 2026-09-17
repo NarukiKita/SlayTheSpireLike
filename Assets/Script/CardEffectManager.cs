@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class CardEffectManager : MonoBehaviour
 {
-    [SerializeField] private PlayerManager playerManager;
     [SerializeField] private EnemyManager enemyManager;
     [SerializeField] private UIManager uiManager;
     [SerializeField] private ConditionManager conditionManager;
@@ -122,19 +121,19 @@ public class CardEffectManager : MonoBehaviour
 
     private void ApplyAttackEffect(CardEffect effect)
     {
-        int damage = effect.value + playerManager.Strength;
+        int damage = effect.value + PlayerManager.Instance.Strength;
         enemyManager.TakeDamage(damage);
     }
 
     private void ApplyDefenseEffect(CardEffect effect)
     {
-        playerManager.AddShield(effect.value);
+        PlayerManager.Instance.AddShield(effect.value);
         uiManager.UpdatePlayerShieldUI();
     }
 
     private void ApplyHealEffect(CardEffect effect)
     {
-        playerManager.Heal(effect.value);
+        PlayerManager.Instance.Heal(effect.value);
     }
 
     private void ApplyDrawEffect(CardEffect effect)
@@ -148,7 +147,7 @@ public class CardEffectManager : MonoBehaviour
 
     private void ApplyStrengthEffect(CardEffect effect)
     {
-        playerManager.AddStrength(effect.value);
+        PlayerManager.Instance.AddStrength(effect.value);
     }
 
     private void ApplyPoisonEffect(CardEffect effect)
@@ -158,14 +157,14 @@ public class CardEffectManager : MonoBehaviour
 
     private void ApplyEnergyEffect(CardEffect effect)
     {
-        playerManager.AddEnergy(effect.value);
+        PlayerManager.Instance.AddEnergy(effect.value);
     }
 
     private void ApplyShieldAttackEffect(CardEffect effect)
     {
-        int damage = playerManager.Shield;
+        int damage = PlayerManager.Instance.Shield;
         enemyManager.TakeDamage(damage);
-        playerManager.ResetShield();
+        PlayerManager.Instance.ResetShield();
     }
 
     private void ApplyRetrieveEffect(CardEffect effect)
@@ -181,13 +180,13 @@ public class CardEffectManager : MonoBehaviour
 
     private void ApplyCardsPlayedDamageEffect(CardEffect effect)
     {
-        int damage = playerManager.CardsPlayedThisTurn * effect.value;
+        int damage = PlayerManager.Instance.CardsPlayedThisTurn * effect.value;
         enemyManager.TakeDamage(damage);
     }
 
     private void ApplyAttackPlayedDamageEffect(CardEffect effect)
     {
-        int damage = playerManager.AttacksPlayedThisTurn * effect.value;
+        int damage = PlayerManager.Instance.AttacksPlayedThisTurn * effect.value;
         enemyManager.TakeDamage(damage);
     }
 
